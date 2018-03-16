@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  age: 
+  speed: 
+  weight: 
+  pass: 
+  shoot: 
+  dribble: 
+  defense: 
+  keeper: 
+  photo: MyString
+  team: MyString
+  company: MyString
+
+two:
+  name: MyString
+  age: 
+  speed: 
+  weight: 
+  pass: 
+  shoot: 
+  dribble: 
+  defense: 
+  keeper: 
+  photo: MyString
+  team: MyString
+  company: MyString

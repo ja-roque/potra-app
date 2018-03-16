@@ -1,0 +1,22 @@
+<h1>New Player</h1>
+
+<div class="container"><%= form_with scope: :Player, local: true do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= form.label :age %><br>
+	<%= form.number_field :number %>
+  </p>
+
+  <p>
+    <%= form.label :photo %><br>
+	<%= form.file_field :picture %>
+  </p>
+ 
+  <p>
+    <%= form.submit :class => 'btn waves-effect waves-light' %>
+  </p>
+<% end %></div>
