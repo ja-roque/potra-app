@@ -1,6 +1,6 @@
 <h1>New Player</h1>
 
-<div class="container"><%= form_with scope: :Player, local: true do |form| %>
+<div class="container"><%= form_with scope: :player, url: players_path, local: true do |form| %>
   <p>
     <%= form.label :name %><br>
     <%= form.text_field :name %>
@@ -8,7 +8,7 @@
  
   <p>
     <%= form.label :age %><br>
-	<%= form.number_field :number %>
+	<%= form.number_field :age %>
   </p>
 
   <p>
