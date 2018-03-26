@@ -1,8 +1,5 @@
-// Place all the styles related to the Players controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-select#cardtype {
+<style type="text/css">
+	select#cardtype {
 	  position:absolute;
 	  top:10px;
 	  left:0px;
@@ -19,11 +16,11 @@ select#cardtype {
 	  color:#fff;
 	}
 
-	.futcard {
+	#card {
 	  width: 300px;
 	  height: 456px;
 	  background: url(https://www.deancdavies.co.uk/images/standard-golg.png);
-	  
+	  position: absolute;
 	  top: 0px;
 	  left: 0px;
 	  right: 0px;
@@ -32,7 +29,7 @@ select#cardtype {
 	  color: #111;
 	}
 
-	.futcard.potm {
+	#card.potm {
 	  background: url(https://www.deancdavies.co.uk/images/potm.png);
 	  color: #ffed8b;
 	}
@@ -66,7 +63,7 @@ select#cardtype {
 	  letter-spacing: -0.03em;
 	}
 
-	.futcard.sbc .rating, .futcard.sbc .position {
+	#card.sbc .rating, #card.sbc .position {
 	  color:#fff;
 	}
 
@@ -219,7 +216,7 @@ select#cardtype {
 	  margin-top: 10px;
 	}
 
-	.futcardtype {
+	#cardtype {
 	  position:absolute;
 	  bottom:0px;
 	  width: 100%;
@@ -227,7 +224,7 @@ select#cardtype {
 	  font-family:'Exo 2';
 	}
 
-	.futcardtype div {
+	#cardtype div {
 	  width:100%;
 	  float: left;
 	  padding:15px 0px;
@@ -239,12 +236,12 @@ select#cardtype {
 	  letter-spacing:0.1em;
 	}
 
-	.futcardtype div:hover {
+	#cardtype div:hover {
 	  transition: all 0.2s;
 	  cursor: pointer;
 	}
 
-	.futcardtype div.if-btn {
+	#cardtype div.if-btn {
 	  background:#111;
 	  color: #FAEC97;
 	}
@@ -270,3 +267,111 @@ select#cardtype {
 	    transform: translateY(-25px);
 	  }
 	}
+
+</style>
+
+<div class="container" id="body">
+  <div class="potm" id="card">
+    <div class="rating">0</div>
+    <div class="position">ST</div>
+    <div class="team"></div>
+    <div class="country"></div>
+    <div class="image"></div>
+    <div class="name"></div>
+    <div class="stats left">
+      <span><strong class="pace">0</strong>PAC</span>
+      <span><strong class="shooting">0</strong>SHO</span>
+      <span><strong class="passing">0</strong>PAS</span>
+    </div>
+    <div class="stats right">
+      <span><strong class="dribbling">0</strong>DRI</span>
+      <span><strong class="defending">0</strong>DEF</span>
+      <span><strong class="physical">0</strong>PHY</span>
+    </div>
+    <div class="chemistry">
+      Hunter
+    </div>
+  </div>
+</div>
+
+<p>
+  <strong>Name:</strong>
+  <%= @player.name %>
+</p>
+ 
+<p>
+  <strong>Age:</strong>
+  <%= @player.age %>
+</p>
+
+<%= link_to 'Edit', edit_player_path(@player) %> |
+
+<script type="text/javascript">
+	var card = ""
+		card = document.querySelector('#card');
+
+	var app = function(type) {
+	  let cards = {
+	    player: {
+	      gold: {
+	        name: "<%= @player.name %>",
+	        image: "",
+	        pace: 67,
+	        shooting: 64,
+	        passing: 44,
+	        dribbling: 55,
+	        defending: 21,
+	        physical: 61,
+	        rating: 63
+	      },
+	      potm: {
+	        name: "<%= @player.name %>",
+	        image: "",
+	        pace: <%= @player.speed %>,
+	        shooting: <%= @player.shoot %>,
+	        passing: <%= @player.pass %>,
+	        dribbling: <%= @player.dribble %>,
+	        defending: <%= @player.defense %>,
+	        physical: <%= @player.weight %>,
+	        rating: 81
+	      }
+	    }
+	  };
+
+	  for (var id in cards.player[type]) {
+	    if (id == "image") {
+	      document.querySelector("." + id).innerHTML = "";
+	      var item = false;
+	      var playerImage = new Image();
+	      playerImage.src = cards.player[type][id];
+	      document.querySelector("." + id).append(playerImage);
+	    } else {
+	      if (Number.isInteger(cards.player[type][id])) {
+	        animateValue("." + id, 0, cards.player[type][id], 1500);
+	      } else {
+	        document.querySelector("." + id).innerHTML = cards.player[type][id];
+	      }
+	    }
+	  }
+
+	  function animateValue(id, start, end, duration) {
+	    var range = end - start;
+	    var current = start;
+	    var increment = end > start ? 1 : -1;
+	    var stepTime = Math.abs(Math.floor(duration / range));
+	    var obj = document.querySelector(id);
+	    var timer = setInterval(function() {
+	      current += increment;
+	      obj.innerHTML = current;
+	      if (current == end) {
+	        clearInterval(timer);
+	        document.getElementById("card").classList.add("animate-infinite");
+	        document.getElementById("card").classList.add("bouncing");
+	      }
+	    }, stepTime);
+	  }
+	};
+
+	app("potm");
+
+</script>

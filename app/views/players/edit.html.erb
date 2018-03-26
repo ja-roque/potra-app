@@ -1,0 +1,114 @@
+<script type="text/javascript">
+	Materialize.updateTextFields()
+</script>
+
+<style type="text/css">
+	input[type=range]{
+		border: 0px;
+	}
+
+	.range-label{
+		top: -20px !important;
+	}
+</style>
+
+<h1>Edit player</h1>
+
+ 
+<%= form_with(model: @player) do |form| %>
+ 
+  <% if @player.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@player.errors.count, "error") %> prohibited
+        this player from being saved:
+      </h2>
+      <ul>
+        <% @player.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <div class="card container blue-grey darken-1" style="margin: 0 auto; padding: 30px">
+  	<div class="input-field">  		
+  	      <%= form.label :name,	:style => 'color:white;'  %>
+  	      <%= form.text_field :name %>  	    
+  	</div>
+  
+    <div class="input-field">    	
+          <%= form.label :age,	:style => 'color:white;'  %>
+          <%= form.text_field :age %>        
+    </div>
+   
+    <div class="input-field">    	
+          <%= form.label :speed,	:style => 'color:white;', :class => 'range-label'  %>
+          <p class="range-field">
+          	<%= form.range_field :speed, :min=>0, :max=>99 %>          		
+          </p>
+    </div>
+  
+    <div class="input-field">    	
+          <%= form.label :weight,	:style => 'color:white;', :class => 'range-label'    %>
+          <p class="range-field">
+          	<%= form.range_field :weight, :min=>0, :max=>99 %>          		
+          </p>
+    </div>
+  
+    <div class="input-field">    	
+          <%= form.label :pass,	:style => 'color:white;', :class => 'range-label'    %>
+          <p class="range-field">
+          	<%= form.range_field :pass, :min=>0, :max=>99 %>          		
+          </p>
+    </div>
+  
+    <div class="input-field">    	
+          <%= form.label :shoot,	:style => 'color:white;', :class => 'range-label'    %>
+          <p class="range-field">
+          	<%= form.range_field :shoot, :min=>0, :max=>99 %>          		
+          </p>
+    </div>
+  
+    <div class="input-field">    	
+          <%= form.label :dribble,	:style => 'color:white;', :class => 'range-label'    %>
+          <p class="range-field">
+          	<%= form.range_field :dribble, :min=>0, :max=>99 %>          		
+          </p>
+    </div>
+  
+    <div class="input-field">    	
+          <%= form.label :defense,	:style => 'color:white;', :class => 'range-label'    %>
+          <p class="range-field">
+          	<%= form.range_field :defense, :min=>0, :max=>99 %>          		
+          </p>
+    </div>
+  
+    <div class="input-field">    	
+          <%= form.label :keeper,	:style => 'color:white;', :class => 'range-label'    %>
+          <p class="range-field">
+          	<%= form.range_field :keeper, :min=>0, :max=>99 %>          		
+          </p>
+    </div>
+  
+    <div class="input-field" >
+          <%= form.label :team,	:style => 'color:white;'  %>
+          <%= form.text_area :team %>        
+    </div>
+  
+    <div class="input-field">    	
+          <%= form.label :company,	:style => 'color:white;'  %>
+          <%= form.text_area :company %>        
+    </div>
+  	
+  
+    <div class="card-action">    	
+        <%= form.submit :class => 'btn waves-effect waves-light btn-large red'%>
+        
+    </div>
+   
+  <% end %>
+   
+  <div class="card-action"><%= link_to 'Back', players_path %></div>
+
+</div>
